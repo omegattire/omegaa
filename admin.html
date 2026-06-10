@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin – Omega Attire</title>
+  <meta name="robots" content="noindex, nofollow"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a class="logo" href="index.html"><span class="logo-omega">Ω</span><span class="logo-text">OMEGA ATTIRE</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">← Back to Site</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="dark-toggle" id="darkToggle">☽</button>
+    </div>
+  </div>
+</nav>
+
+<!-- LOGIN -->
+<div id="loginScreen" class="admin-login-page">
+  <div class="admin-login-card">
+    <div class="logo" style="margin-bottom:8px">
+      <span class="logo-omega">Ω</span>
+      <span class="logo-text">OMEGA ATTIRE</span>
+    </div>
+    <h2>Admin Login</h2>
+    <p>Sign in with your Supabase Auth email &amp; password.</p>
+    <form id="loginForm" class="admin-login-form" novalidate>
+      <div class="form-group">
+        <label for="adminEmail">Email</label>
+        <input type="email" id="adminEmail" placeholder="admin@omegaattire.in" required/>
+      </div>
+      <div class="form-group">
+        <label for="adminPw">Password</label>
+        <input type="password" id="adminPw" placeholder="Your password" required/>
+      </div>
+      <div class="form-error-msg" id="loginErr" style="display:none"></div>
+      <button type="submit" class="btn btn-primary btn-full" id="loginBtn">Login</button>
+    </form>
+    <p style="font-size:.78rem;color:var(--g4);margin-top:18px;text-align:center;line-height:1.6">
+      Create your admin account in<br>
+      Supabase → Authentication → Users
+    </p>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" style="display:none">
+  <div class="admin-page">
+
+    <aside class="admin-sidebar">
+      <div class="admin-brand">
+        <div class="logo">
+          <span class="logo-omega">Ω</span>
+          <span class="logo-text" style="color:rgba(255,255,255,.9)">ADMIN</span>
+        </div>
+      </div>
+      <nav class="admin-nav">
+        <a href="#" class="active" onclick="switchTab('pending',this);return false">⏳ Pending</a>
+        <a href="#" onclick="switchTab('approved',this);return false">✅ Approved</a>
+        <a href="#" onclick="switchTab('rejected',this);return false">❌ Rejected</a>
+        <a href="#" onclick="switchTab('analytics',this);return false">📊 Analytics</a>
+        <a href="#" class="nav-logout" onclick="doLogout();return false">🚪 Logout</a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-header">
+        <h1 id="dashTitle">Pending Reviews</h1>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <span id="adminUserLabel" style="font-size:.82rem;color:var(--g3)"></span>
+          <button class="btn btn-ghost btn-sm" onclick="loadCurrentTab()">↺ Refresh</button>
+          <button class="btn btn-outline btn-sm" onclick="doLogout()">Logout</button>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="admin-stats-row">
+        <div class="admin-stat"><div class="admin-stat-num orange" id="adPending">—</div><div class="admin-stat-lbl">Pending</div></div>
+        <div class="admin-stat"><div class="admin-stat-num green"  id="adApproved">—</div><div class="admin-stat-lbl">Approved</div></div>
+        <div class="admin-stat"><div class="admin-stat-num red"    id="adRejected">—</div><div class="admin-stat-lbl">Rejected</div></div>
+        <div class="admin-stat"><div class="admin-stat-num blue"   id="adAvg">—</div><div class="admin-stat-lbl">Avg Rating</div></div>
+      </div>
+
+      <!-- Reviews table -->
+      <div class="admin-card" id="tableCard">
+        <div class="admin-card-header">
+          <h3 id="tableTitle">Pending Reviews</h3>
+          <input type="text" id="tableSearch" placeholder="Search…"
+            style="padding:8px 12px;border:2px solid var(--g5);border-radius:6px;font-size:.84rem;
+                   background:var(--white);color:var(--black);outline:none;max-width:220px"
+            oninput="filterTable(this.value)"/>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Rating</th>
+                <th>Review</th>
+                <th>Product</th>
+                <th>Date</th>
+                <th>Photos</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminTbody">
+              <tr><td colspan="8" style="text-align:center;padding:40px">
+                <div class="spinner" style="margin:0 auto"></div>
+              </td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Analytics panel -->
+      <div id="analyticsPanel" style="display:none">
+        <div class="admin-card" style="padding:32px">
+          <h3 style="margin-bottom:24px;font-size:1rem;font-weight:700">📊 Review Analytics</h3>
+          <div id="analyticsGrid" class="admin-stats-row"></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="config.js"></script>
+<script src="supabase-client.js"></script>
+<script src="ui.js"></script>
+<script>
+var currentTab = 'pending';
+var allRows    = [];
+
+document.addEventListener('DOMContentLoaded', async function() {
+  var ready = initSupabase();
+
+  if (!ready) {
+    var err = document.getElementById('loginErr');
+    err.textContent = '⚠️ Supabase not configured. Open config.js and add your credentials first.';
+    err.style.display = 'block';
+    document.getElementById('loginBtn').disabled = true;
+    return;
+  }
+
+  /* Check existing session */
+  var sessionRes = await getDB().auth.getSession();
+  if (sessionRes.data && sessionRes.data.session) {
+    showDashboard(sessionRes.data.session.user);
+  }
+
+  /* Login */
+  document.getElementById('loginForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var btn = document.getElementById('loginBtn');
+    var err = document.getElementById('loginErr');
+    btn.disabled = true; btn.textContent = 'Signing in…';
+    err.style.display = 'none';
+
+    var res = await getDB().auth.signInWithPassword({
+      email:    document.getElementById('adminEmail').value.trim(),
+      password: document.getElementById('adminPw').value
+    });
+
+    btn.disabled = false; btn.textContent = 'Login';
+
+    if (res.error) {
+      err.textContent = '❌ ' + res.error.message;
+      err.style.display = 'block';
+    } else {
+      showDashboard(res.data.user);
+    }
+  });
+});
+
+function showDashboard(user) {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('dashboard').style.display   = 'block';
+  document.getElementById('adminUserLabel').textContent = '👤 ' + user.email;
+  loadAdminStats();
+  loadCurrentTab();
+}
+
+async function doLogout() {
+  await getDB().auth.signOut();
+  document.getElementById('dashboard').style.display   = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('adminPw').value = '';
+}
+
+/* ── STATS ── */
+async function loadAdminStats() {
+  var res = await getDB().from('admin_stats').select('*').single();
+  if (!res.data) return;
+  var d = res.data;
+  document.getElementById('adPending').textContent  = d.pending  ?? '—';
+  document.getElementById('adApproved').textContent = d.approved ?? '—';
+  document.getElementById('adRejected').textContent = d.rejected ?? '—';
+  document.getElementById('adAvg').textContent = d.avg_rating ? d.avg_rating + '★' : '—';
+}
+
+/* ── TABS ── */
+var TAB_LABELS = { pending:'Pending Reviews', approved:'Approved Reviews', rejected:'Rejected Reviews', analytics:'Analytics' };
+function switchTab(tab, el) {
+  currentTab = tab;
+  document.querySelectorAll('.admin-nav a').forEach(function(a){ a.classList.remove('active'); });
+  if (el) el.classList.add('active');
+  document.getElementById('dashTitle').textContent  = TAB_LABELS[tab];
+  document.getElementById('tableTitle').textContent = TAB_LABELS[tab];
+  document.getElementById('tableCard').style.display      = tab === 'analytics' ? 'none'  : 'block';
+  document.getElementById('analyticsPanel').style.display = tab === 'analytics' ? 'block' : 'none';
+  loadCurrentTab();
+}
+function loadCurrentTab() {
+  if (currentTab === 'analytics') loadAnalytics();
+  else loadReviews(currentTab);
+}
+
+/* ── LOAD REVIEWS ── */
+async function loadReviews(status) {
+  var tbody = document.getElementById('adminTbody');
+  tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:40px"><div class="spinner" style="margin:0 auto"></div></td></tr>';
+
+  var res = await getDB().from('reviews').select('*').eq('status', status).order('created_at',{ascending:false});
+
+  if (res.error) {
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--red)">Error: ' + escapeHtml(res.error.message) + '</td></tr>';
+    return;
+  }
+
+  allRows = res.data || [];
+  renderTable(allRows);
+}
+
+function renderTable(rows) {
+  var tbody = document.getElementById('adminTbody');
+  if (!rows.length) {
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:48px;color:var(--g4);font-size:.9rem">No reviews in this category.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = rows.map(function(r){
+    var date   = new Date(r.created_at).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+    var photos = (r.images||[]).length;
+    var stars  = '<span style="color:#f5a623">'+'★'.repeat(r.rating)+'</span>'+'<span style="color:var(--g5)">'+'★'.repeat(5-r.rating)+'</span>';
+    return '<tr id="row-'+r.id+'">' +
+      '<td><strong>'+escapeHtml(r.name)+'</strong><br><small style="color:var(--g4)">📍 '+escapeHtml(r.city)+'</small></td>' +
+      '<td style="font-size:.88rem;white-space:nowrap">'+stars+'</td>' +
+      '<td style="max-width:220px;font-size:.81rem;color:var(--g2)">'+escapeHtml(r.review_text.slice(0,90))+(r.review_text.length>90?'…':'')+'</td>' +
+      '<td style="font-size:.8rem">'+escapeHtml(r.product)+'</td>' +
+      '<td style="font-size:.78rem;white-space:nowrap">'+date+'</td>' +
+      '<td style="text-align:center;font-size:.82rem">'+(photos?'<span style="cursor:pointer" onclick="viewPhoto('+r.id+')" title="View photos">🖼 '+photos+'</span>':'—')+'</td>' +
+      '<td><span class="status-pill sp-'+r.status+'">'+r.status+'</span></td>' +
+      '<td>' +
+        '<div class="act-btns">' +
+          (r.status!=='approved'?'<button class="act-btn ab-approve" onclick="setStatus('+r.id+',\'approved\')">✓ Approve</button>':'') +
+          (r.status!=='rejected'?'<button class="act-btn ab-reject"  onclick="setStatus('+r.id+',\'rejected\')">✗ Reject</button>':'') +
+          '<button class="act-btn ab-delete" onclick="deleteReview('+r.id+')">🗑 Delete</button>' +
+        '</div>' +
+      '</td>' +
+    '</tr>';
+  }).join('');
+}
+
+function filterTable(q) {
+  if (!q) { renderTable(allRows); return; }
+  var lq = q.toLowerCase();
+  renderTable(allRows.filter(function(r){
+    return r.name.toLowerCase().includes(lq) || r.city.toLowerCase().includes(lq) ||
+           r.review_text.toLowerCase().includes(lq) || r.product.toLowerCase().includes(lq);
+  }));
+}
+
+/* ── APPROVE / REJECT ── */
+async function setStatus(id, status) {
+  var res = await getDB().from('reviews').update({status:status}).eq('id',id);
+  if (res.error) { showToast('❌ Error: ' + res.error.message); return; }
+  showToast(status==='approved' ? '✅ Review approved and now visible publicly!' : '❌ Review rejected.');
+  document.getElementById('row-'+id) && document.getElementById('row-'+id).remove();
+  allRows = allRows.filter(function(r){ return r.id !== id; });
+  loadAdminStats();
+}
+
+/* ── DELETE ── */
+async function deleteReview(id) {
+  if (!confirm('Permanently delete this review? This cannot be undone.')) return;
+  var row = allRows.find(function(r){ return r.id === id; });
+  if (row && row.images && row.images.length) {
+    var paths = row.images.map(function(url){
+      var parts = url.split('/review-images/');
+      return parts[1] ? decodeURIComponent(parts[1].split('?')[0]) : null;
+    }).filter(Boolean);
+    if (paths.length) await getDB().storage.from(CONFIG.STORAGE_BUCKET).remove(paths);
+  }
+  var res = await getDB().from('reviews').delete().eq('id',id);
+  if (res.error) { showToast('❌ Delete failed: ' + res.error.message); return; }
+  showToast('🗑 Review deleted.');
+  document.getElementById('row-'+id) && document.getElementById('row-'+id).remove();
+  allRows = allRows.filter(function(r){ return r.id !== id; });
+  loadAdminStats();
+}
+
+/* ── VIEW PHOTO ── */
+function viewPhoto(id) {
+  var row = allRows.find(function(r){ return r.id === id; });
+  if (row && row.images && row.images[0]) openLightbox(row.images[0]);
+}
+
+/* ── ANALYTICS ── */
+async function loadAnalytics() {
+  var grid = document.getElementById('analyticsGrid');
+  grid.innerHTML = '<div class="spinner-wrap"><div class="spinner"></div></div>';
+  var a = await getDB().from('admin_stats').select('*').single();
+  var p = await getDB().from('review_stats').select('*').single();
+  var d = a.data || {};
+  var s = p.data || {};
+  var total = +d.total || 1;
+  var items = [
+    {l:'Total Reviews',    v:d.total    ||0, c:'red'   },
+    {l:'Pending',          v:d.pending  ||0, c:'orange'},
+    {l:'Approved',         v:d.approved ||0, c:'green' },
+    {l:'Rejected',         v:d.rejected ||0, c:'blue'  },
+    {l:'Avg Rating',       v:(d.avg_rating||0)+'★', c:'red'},
+    {l:'Approval Rate',    v:Math.round((+d.approved/total)*100)+'%', c:'green'},
+    {l:'5-Star Reviews',   v:s.five_star ||'—', c:'red'  },
+    {l:'Satisfaction',     v:(s.satisfaction_pct||'—')+'%', c:'green'},
+  ];
+  grid.innerHTML = items.map(function(i){
+    return '<div class="admin-stat"><div class="admin-stat-num '+i.c+'">'+i.v+'</div><div class="admin-stat-lbl">'+i.l+'</div></div>';
+  }).join('');
+}
+
+function escapeHtml(str) {
+  return String(str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+</script>
+</body>
+</html>

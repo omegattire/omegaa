@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Omega Attire – Customer Reviews | Real Reviews. Real Quality.</title>
+  <meta name="description" content="Browse genuine customer reviews, ratings and photos of custom T-shirts from Omega Attire, delivered across India."/>
+  <meta property="og:title"       content="Omega Attire – Customer Reviews"/>
+  <meta property="og:description" content="Real Reviews. Real Customers. Real Quality."/>
+  <meta property="og:type"        content="website"/>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"LocalBusiness","name":"Omega Attire",
+   "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","reviewCount":"500"}}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a class="logo" href="index.html">
+      <span class="logo-omega">Ω</span>
+      <span class="logo-text">OMEGA ATTIRE</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="#submit">Write Review</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="admin.html" class="nav-admin">Admin</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">☽</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-shape"></div>
+  <div class="hero-content">
+    <div class="hero-badge" id="heroBadge">⭐ Omega Attire Reviews</div>
+    <h1 class="hero-title">See What Our Customers<br><em>Say About</em> Omega Attire</h1>
+    <p class="hero-sub">Browse genuine customer reviews, ratings, and photos of custom T-shirts delivered across India.</p>
+    <div class="hero-btns">
+      <a href="#submit" class="btn btn-primary">✍ Write a Review</a>
+      <a href="reviews.html" class="btn btn-outline">View All Reviews</a>
+    </div>
+    <div class="hero-trust">
+      <span>✓ Verified Customers</span>
+      <span>✓ Real Photos</span>
+      <span>✓ Pan-India Delivery</span>
+    </div>
+  </div>
+  <div class="hero-live-stats" id="heroStats">
+    <div class="hero-stat-pill">
+      <div class="num" id="statTotal">—</div>
+      <div class="lbl">Total Reviews</div>
+    </div>
+    <div class="hero-stat-pill">
+      <div class="num" id="statAvg">—</div>
+      <div class="lbl">Average Rating</div>
+    </div>
+    <div class="hero-stat-pill">
+      <div class="num" id="statSat">—</div>
+      <div class="lbl">Satisfaction</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED REVIEWS -->
+<section style="background:var(--g6);padding:88px 20px">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">CUSTOMER LOVE</div>
+      <h2>Featured Reviews</h2>
+      <p>What our customers are saying — live from our database</p>
+    </div>
+    <div class="reviews-grid" id="featuredGrid"></div>
+    <div class="section-cta reveal" style="margin-top:40px">
+      <a href="reviews.html" class="btn btn-primary">View All Reviews →</a>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY PREVIEW -->
+<section style="padding:88px 20px">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">CUSTOMER GALLERY</div>
+      <h2>Real Customer Photos</h2>
+      <p>Authentic photos uploaded by our customers — no filters, no staging</p>
+    </div>
+    <div class="gallery-grid" id="galleryPreview"></div>
+    <div class="section-cta reveal" style="margin-top:40px">
+      <a href="gallery.html" class="btn btn-outline">Browse Full Gallery →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SUBMIT REVIEW -->
+<section id="submit" style="background:var(--g6);padding:88px 20px">
+  <div class="container">
+    <div class="submit-wrapper">
+
+      <div class="submit-left reveal">
+        <div class="section-tag">SHARE YOUR STORY</div>
+        <h2 style="font-family:var(--font-d);font-size:clamp(1.9rem,3.2vw,2.8rem);letter-spacing:.025em;margin:12px 0">Submit Your Review</h2>
+        <p style="color:var(--g3);line-height:1.75;margin-bottom:24px">Ordered from Omega Attire? We'd love to hear about your experience and see your photos!</p>
+        <ul class="submit-perks">
+          <li>✓ Takes less than 2 minutes</li>
+          <li>✓ Upload up to 5 photos</li>
+          <li>✓ Stored permanently in our database</li>
+          <li>✓ Visible to all customers after approval</li>
+        </ul>
+      </div>
+
+      <div class="submit-right reveal">
+        <form class="review-form" id="reviewForm" novalidate autocomplete="off">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="f-name">Your Name *</label>
+              <input type="text" id="f-name" placeholder="e.g. Arjun Sharma" maxlength="100"/>
+              <span class="form-err" id="err-name"></span>
+            </div>
+            <div class="form-group">
+              <label for="f-city">City *</label>
+              <input type="text" id="f-city" placeholder="e.g. Chennai" maxlength="100"/>
+              <span class="form-err" id="err-city"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Star Rating *</label>
+            <div class="star-picker" id="starPicker">
+              <span class="star-pick" data-v="1">★</span>
+              <span class="star-pick" data-v="2">★</span>
+              <span class="star-pick" data-v="3">★</span>
+              <span class="star-pick" data-v="4">★</span>
+              <span class="star-pick" data-v="5">★</span>
+              <span class="star-lbl" id="starLbl">Select rating</span>
+            </div>
+            <input type="hidden" id="f-rating"/>
+            <span class="form-err" id="err-rating"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="f-product">Product Type *</label>
+            <select id="f-product">
+              <option value="">Select product…</option>
+              <option>Custom Printed T-Shirt</option>
+              <option>Polo T-Shirt</option>
+              <option>Oversized T-Shirt</option>
+              <option>Round Neck T-Shirt</option>
+              <option>V-Neck T-Shirt</option>
+              <option>Couple T-Shirts</option>
+              <option>Team / Bulk Order</option>
+            </select>
+            <span class="form-err" id="err-product"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="f-review">Your Review * <small style="font-weight:400;text-transform:none;letter-spacing:0">(min 20 characters)</small></label>
+            <textarea id="f-review" rows="5" placeholder="Tell us about the quality, print, delivery, packaging…" maxlength="2000"></textarea>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px">
+              <span class="form-err" id="err-review"></span>
+              <span class="char-count"><span id="charCount">0</span>/2000</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Photos <small style="font-weight:400;text-transform:none;letter-spacing:0">(optional · max 5 · 5 MB each)</small></label>
+            <div class="upload-zone" id="uploadZone">
+              <div class="upload-icon">📸</div>
+              <p>Drag &amp; drop or <span>browse</span> to choose photos</p>
+              <small>JPG, PNG, WEBP · Max 5 MB each · Up to 5 photos</small>
+              <input type="file" id="photoInput" accept="image/*" multiple hidden/>
+            </div>
+            <div class="photo-thumbs" id="photoThumbs"></div>
+            <span class="form-err" id="err-photos"></span>
+            <div id="uploadProgress" style="font-size:.82rem;color:var(--g3);margin-top:6px;min-height:20px"></div>
+          </div>
+
+          <div class="form-error-msg" id="formErrMsg" style="display:none"></div>
+
+          <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
+            Submit Review
+          </button>
+
+          <div class="form-success" id="formSuccess" style="display:none">
+            🎉 Thank you! Your review has been submitted and is pending approval.
+            It will be visible to all customers once our team approves it.
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="padding:88px 20px">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">QUESTIONS</div>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">How long does delivery take across India? <span class="faq-icon">+</span></button>
+        <div class="faq-a">We deliver pan-India within 5–7 business days. Express delivery (2–3 days) is available for select pin codes.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What printing methods do you use? <span class="faq-icon">+</span></button>
+        <div class="faq-a">We use DTF (Direct-to-Film), Screen Printing, and Sublimation depending on design and fabric. All are wash-safe and long-lasting.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can I order in bulk for my team or event? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes! We handle bulk orders from 10 to 10,000+ pieces. Contact us on WhatsApp for bulk pricing and quotes.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Are the reviews on this page genuine? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Every review is submitted by a real customer and manually approved by our team before going live. No fake reviews, ever.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What if I'm not happy with my order? <span class="faq-icon">+</span></button>
+        <div class="faq-a">We offer a 100% reprint or refund guarantee if the print quality doesn't match what was approved. Reach out within 7 days of delivery.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background:var(--g6);padding:88px 20px">
+  <div class="container">
+    <div class="contact-wrapper">
+      <div class="reveal">
+        <div class="section-tag">GET IN TOUCH</div>
+        <h2 style="font-family:var(--font-d);font-size:clamp(1.9rem,3.2vw,2.8rem);letter-spacing:.025em;margin:12px 0 16px">Contact Us</h2>
+        <p style="color:var(--g3);margin-bottom:26px">Questions about your order, bulk pricing, or custom designs? We're here 7 days a week.</p>
+        <div class="contact-links">
+          <a href="#" data-wa class="contact-link cl-wa">💬 Chat on WhatsApp</a>
+          <a href="#" data-ig class="contact-link cl-ig">📸 Follow on Instagram</a>
+          <a href="#" data-email data-showtext="1" class="contact-link cl-em">✉️ Email Us</a>
+        </div>
+      </div>
+      <div class="reveal">
+        <form class="contact-form" id="contactForm">
+          <div class="form-group">
+            <label for="c-name">Name</label>
+            <input type="text" id="c-name" placeholder="Your Name" required/>
+          </div>
+          <div class="form-group">
+            <label for="c-email">Email</label>
+            <input type="email" id="c-email" placeholder="Email Address" required/>
+          </div>
+          <div class="form-group">
+            <label for="c-msg">Message</label>
+            <textarea id="c-msg" rows="4" placeholder="Your message…" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="logo"><span class="logo-omega">Ω</span><span class="logo-text">OMEGA ATTIRE</span></div>
+        <p class="footer-tagline">Real Reviews. Real Customers. Real Quality.</p>
+      </div>
+      <nav class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="reviews.html">Reviews</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="#submit">Write Review</a>
+        <a href="#faq">FAQ</a>
+        <a href="admin.html">Admin</a>
+      </nav>
+      <div class="footer-socials">
+        <a href="#" data-wa class="soc-btn">WhatsApp</a>
+        <a href="#" data-ig class="soc-btn">Instagram</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Omega Attire. All rights reserved.</span>
+      <span>Made with ❤️ in India</span>
+    </div>
+  </div>
+</footer>
+
+<a href="#" data-wa class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.121 1.534 5.857L.054 23.406a.5.5 0 0 0 .617.611l5.758-1.505A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.73 9.73 0 0 1-5.048-1.41l-.362-.214-3.742.981.997-3.648-.234-.374A9.718 9.718 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="config.js"></script>
+<script src="supabase-client.js"></script>
+<script src="ui.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+  var ready = initSupabase();
+
+  /* ── Stats ── */
+  if (ready) {
+    fetchStats().then(function(stats) {
+      if (!stats) return;
+      document.getElementById('heroBadge').textContent =
+        '⭐ ' + stats.average_rating + ' / 5  ·  ' + stats.total_reviews + ' Reviews';
+      animateCount(document.getElementById('statTotal'), +stats.total_reviews);
+      animateCount(document.getElementById('statAvg'),   +stats.average_rating, true, '★');
+      animateCount(document.getElementById('statSat'),   +stats.satisfaction_pct, false, '%');
+    });
+  }
+
+  /* ── Featured reviews ── */
+  var grid = document.getElementById('featuredGrid');
+  grid.innerHTML = spinnerHtml();
+  if (!ready) {
+    grid.innerHTML = setupNotConfiguredHtml();
+  } else {
+    fetchApprovedReviews({ perPage: 3, sort: 'newest' }).then(function(res) {
+      if (res.error || !res.data.length) {
+        grid.innerHTML = emptyState('📭', 'No Reviews Yet',
+          'Be the first to share your experience with Omega Attire!');
+      } else {
+        grid.innerHTML = res.data.map(buildReviewCard).join('');
+        initReveal();
+      }
+    });
+  }
+
+  /* ── Gallery preview ── */
+  var gp = document.getElementById('galleryPreview');
+  gp.innerHTML = spinnerHtml();
+  if (!ready) {
+    gp.innerHTML = setupNotConfiguredHtml();
+  } else {
+    getDB().from('reviews')
+      .select('images,name,city')
+      .eq('status','approved')
+      .not('images','eq','{}')
+      .order('created_at',{ascending:false})
+      .limit(16)
+      .then(function(res) {
+        var photos = [];
+        (res.data||[]).forEach(function(r){
+          (r.images||[]).forEach(function(url){
+            if (photos.length < 8) photos.push({url:url,name:r.name,city:r.city});
+          });
+        });
+        if (!photos.length) {
+          gp.innerHTML = emptyState('🖼','No Photos Yet','Photos will appear here once customers upload them.');
+        } else {
+          gp.innerHTML = photos.map(function(p){
+            return '<div class="gallery-item" onclick="openLightbox(\''+p.url+'\')">'+
+              '<img src="'+p.url+'" alt="'+escapeHtml(p.name)+'" loading="lazy">'+
+              '<div class="gallery-overlay"><div class="gallery-overlay-text">'+
+                escapeHtml(p.name)+' · '+escapeHtml(p.city)+
+              '</div></div></div>';
+          }).join('');
+        }
+        initReveal();
+      });
+  }
+
+  /* ── Review form ── */
+  initStarPicker('starPicker','f-rating','starLbl');
+  initPhotoUpload('uploadZone','photoInput','photoThumbs','err-photos');
+
+  var reviewTA  = document.getElementById('f-review');
+  var charCount = document.getElementById('charCount');
+  if (reviewTA) {
+    reviewTA.addEventListener('input', function(){
+      if (charCount) charCount.textContent = reviewTA.value.length;
+    });
+  }
+
+  document.getElementById('reviewForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    /* Validate */
+    var ok = true;
+    function setErr(id, msg) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = msg;
+      if (msg) ok = false;
+    }
+    setErr('err-name',    document.getElementById('f-name').value.trim().length < 2 ? 'Please enter your name.' : '');
+    setErr('err-city',    document.getElementById('f-city').value.trim().length < 2 ? 'Please enter your city.' : '');
+    setErr('err-rating',  !document.getElementById('f-rating').value                ? 'Please select a star rating.' : '');
+    setErr('err-product', !document.getElementById('f-product').value               ? 'Please select a product type.' : '');
+    setErr('err-review',  document.getElementById('f-review').value.trim().length < 20 ? 'Review must be at least 20 characters.' : '');
+    if (!ok) return;
+
+    if (!ready) {
+      document.getElementById('formErrMsg').textContent =
+        '⚙️ Supabase not configured. Open config.js and add your credentials.';
+      document.getElementById('formErrMsg').style.display = 'block';
+      return;
+    }
+
+    var btn      = document.getElementById('submitBtn');
+    var errMsg   = document.getElementById('formErrMsg');
+    var success  = document.getElementById('formSuccess');
+    var progress = document.getElementById('uploadProgress');
+
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+    errMsg.style.display  = 'none';
+    success.style.display = 'none';
+
+    try {
+      /* Upload photos */
+      var files     = document.getElementById('uploadZone')._files || [];
+      var imageUrls = [];
+      if (files.length) {
+        imageUrls = await uploadImages(files, function(done, total){
+          progress.textContent = 'Uploading photo ' + done + ' of ' + total + '…';
+        });
+        progress.textContent = imageUrls.length + ' photo(s) uploaded ✓';
+      }
+
+      /* Save review */
+      await submitReview({
+        name:        document.getElementById('f-name').value.trim(),
+        city:        document.getElementById('f-city').value.trim(),
+        rating:      parseInt(document.getElementById('f-rating').value),
+        product:     document.getElementById('f-product').value,
+        review_text: document.getElementById('f-review').value.trim(),
+        images:      imageUrls,
+        status:      'pending',
+        verified:    false
+      });
+
+      success.style.display = 'block';
+      document.getElementById('reviewForm').reset();
+      document.getElementById('photoThumbs').innerHTML = '';
+      document.getElementById('uploadZone')._files = [];
+      document.getElementById('charCount').textContent = '0';
+      document.getElementById('starLbl').textContent   = 'Select rating';
+      document.querySelectorAll('.star-pick').forEach(function(s){ s.classList.remove('on'); });
+      progress.textContent = '';
+      success.scrollIntoView({behavior:'smooth', block:'center'});
+
+    } catch(err) {
+      errMsg.textContent     = '❌ ' + (err.message || 'Submission failed. Please try again.');
+      errMsg.style.display   = 'block';
+      progress.textContent   = '';
+    } finally {
+      btn.disabled    = false;
+      btn.textContent = 'Submit Review';
+    }
+  });
+
+  initReveal();
+});
+</script>
+</body>
+</html>

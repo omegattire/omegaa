@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>All Reviews – Omega Attire</title>
+  <meta name="description" content="Browse all customer reviews for Omega Attire custom T-shirts."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a class="logo" href="index.html"><span class="logo-omega">Ω</span><span class="logo-text">OMEGA ATTIRE</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="reviews.html" class="active">Reviews</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="index.html#submit">Write Review</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+      <li><a href="admin.html" class="nav-admin">Admin</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="dark-toggle" id="darkToggle">☽</button>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="section-tag">ALL REVIEWS</div>
+  <h1>What Our Customers Say</h1>
+  <p id="reviewCountLine">Loading reviews from database…</p>
+  <!-- Rating summary -->
+  <div class="rating-summary" style="max-width:680px;margin:28px auto 0">
+    <div class="rs-big">
+      <span class="rs-big-num" id="rsAvg">—</span>
+      <span class="rs-big-stars">★★★★★</span>
+      <span class="rs-big-sub" id="rsTotal">out of 5</span>
+    </div>
+    <div class="rs-bars">
+      <div class="rs-bar-row"><span>5★</span><div class="rs-bar"><div class="rs-bar-fill" id="bar5" style="width:0"></div></div><span id="pct5">—</span></div>
+      <div class="rs-bar-row"><span>4★</span><div class="rs-bar"><div class="rs-bar-fill" id="bar4" style="width:0"></div></div><span id="pct4">—</span></div>
+      <div class="rs-bar-row"><span>3★</span><div class="rs-bar"><div class="rs-bar-fill" id="bar3" style="width:0"></div></div><span id="pct3">—</span></div>
+      <div class="rs-bar-row"><span>2★</span><div class="rs-bar"><div class="rs-bar-fill" id="bar2" style="width:0"></div></div><span id="pct2">—</span></div>
+      <div class="rs-bar-row"><span>1★</span><div class="rs-bar"><div class="rs-bar-fill" id="bar1" style="width:0"></div></div><span id="pct1">—</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="container" style="padding-top:36px">
+  <div class="controls-bar">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search by name, city or keyword…"/>
+    </div>
+    <select class="filter-sel" id="ratingFilter">
+      <option value="">All Ratings</option>
+      <option value="5">5 Stars ★★★★★</option>
+      <option value="4">4 Stars ★★★★☆</option>
+      <option value="3">3 Stars ★★★☆☆</option>
+      <option value="2">2 Stars ★★☆☆☆</option>
+      <option value="1">1 Star  ★☆☆☆☆</option>
+    </select>
+    <select class="filter-sel" id="sortSelect">
+      <option value="newest">Latest First</option>
+      <option value="oldest">Oldest First</option>
+    </select>
+  </div>
+
+  <div class="reviews-grid" id="reviewsGrid"></div>
+  <div class="pagination" id="pagination"></div>
+
+  <div style="text-align:center;margin:48px 0">
+    <a href="index.html#submit" class="btn btn-primary">✍ Write Your Review →</a>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="logo"><span class="logo-omega">Ω</span><span class="logo-text">OMEGA ATTIRE</span></div>
+        <p class="footer-tagline">Real Reviews. Real Customers. Real Quality.</p>
+      </div>
+      <nav class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="reviews.html">Reviews</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="index.html#submit">Write Review</a>
+      </nav>
+      <div class="footer-socials">
+        <a href="#" data-wa class="soc-btn">WhatsApp</a>
+        <a href="#" data-ig class="soc-btn">Instagram</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Omega Attire. All rights reserved.</span>
+      <span>Made with ❤️ in India</span>
+    </div>
+  </div>
+</footer>
+
+<a href="#" data-wa class="wa-float" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.121 1.534 5.857L.054 23.406a.5.5 0 0 0 .617.611l5.758-1.505A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.73 9.73 0 0 1-5.048-1.41l-.362-.214-3.742.981.997-3.648-.234-.374A9.718 9.718 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="config.js"></script>
+<script src="supabase-client.js"></script>
+<script src="ui.js"></script>
+<script>
+var PER_PAGE    = 9;
+var currentPage = 1;
+var searchTimer = null;
+var ready       = false;
+
+document.addEventListener('DOMContentLoaded', async function() {
+  ready = initSupabase();
+
+  var grid = document.getElementById('reviewsGrid');
+
+  if (!ready) {
+    grid.innerHTML = setupNotConfiguredHtml();
+    document.getElementById('reviewCountLine').textContent = 'Configure Supabase in config.js to see reviews.';
+    return;
+  }
+
+  /* Load stats */
+  var stats = await fetchStats();
+  if (stats) {
+    document.getElementById('rsAvg').textContent   = stats.average_rating || '—';
+    document.getElementById('rsTotal').textContent = 'out of 5 · ' + stats.total_reviews + ' reviews';
+    var total = +stats.total_reviews || 1;
+    [[5,stats.five_star],[4,stats.four_star],[3,stats.three_star],[2,stats.two_star],[1,stats.one_star]]
+      .forEach(function(pair){
+        var pct = Math.round((+pair[1]||0) / total * 100);
+        document.getElementById('bar'+pair[0]).style.width = pct + '%';
+        document.getElementById('pct'+pair[0]).textContent = pct + '%';
+      });
+  }
+
+  await loadReviews();
+
+  var searchTimer = null;
+  document.getElementById('searchInput').addEventListener('input', function(){
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(function(){ currentPage = 1; loadReviews(); }, 380);
+  });
+  document.getElementById('ratingFilter').addEventListener('change', function(){ currentPage = 1; loadReviews(); });
+  document.getElementById('sortSelect').addEventListener('change',   function(){ currentPage = 1; loadReviews(); });
+});
+
+async function loadReviews() {
+  var grid = document.getElementById('reviewsGrid');
+  grid.innerHTML = spinnerHtml();
+
+  var search = document.getElementById('searchInput').value.trim();
+  var rating = parseInt(document.getElementById('ratingFilter').value) || 0;
+  var sort   = document.getElementById('sortSelect').value;
+
+  var res = await fetchApprovedReviews({ search:search, rating:rating, sort:sort, page:currentPage, perPage:PER_PAGE });
+
+  if (res.error) {
+    grid.innerHTML = emptyState('❌','Error loading reviews', escapeHtml(res.error));
+    return;
+  }
+
+  var countLine = document.getElementById('reviewCountLine');
+  if (res.count) {
+    countLine.textContent = res.count + ' genuine review' + (res.count !== 1 ? 's' : '') + ' from real customers across India';
+  } else {
+    countLine.textContent = '';
+  }
+
+  if (!res.data.length) {
+    grid.innerHTML = emptyState('🔍','No reviews found',
+      search || rating ? 'Try a different search or filter.' : 'No approved reviews yet. Be the first!');
+    document.getElementById('pagination').innerHTML = '';
+    return;
+  }
+
+  grid.innerHTML = res.data.map(buildReviewCard).join('');
+  initReveal();
+  renderPagination(res.count);
+}
+
+function renderPagination(total) {
+  var pages = Math.ceil(total / PER_PAGE);
+  var pag   = document.getElementById('pagination');
+  if (pages <= 1) { pag.innerHTML = ''; return; }
+
+  var html = '<button class="pg-btn"' + (currentPage===1?' disabled':'') +
+    ' onclick="gotoPage('+(currentPage-1)+')">‹ Prev</button>';
+
+  for (var i = 1; i <= pages; i++) {
+    if (pages > 7 && Math.abs(i - currentPage) > 2 && i !== 1 && i !== pages) {
+      if (i === 2 || i === pages-1) html += '<span style="padding:0 4px;color:var(--g4)">…</span>';
+      continue;
+    }
+    html += '<button class="pg-btn'+(i===currentPage?' active':'')+'" onclick="gotoPage('+i+')">'+i+'</button>';
+  }
+  html += '<button class="pg-btn"'+(currentPage===pages?' disabled':'')+' onclick="gotoPage('+(currentPage+1)+')">Next ›</button>';
+  pag.innerHTML = html;
+}
+
+function gotoPage(n) {
+  currentPage = n;
+  loadReviews();
+  window.scrollTo({top:200, behavior:'smooth'});
+}
+</script>
+</body>
+</html>
