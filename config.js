@@ -30,13 +30,13 @@ const CONFIG = {
   BRAND_NAME:       'Omega Attire',
   BRAND_TAGLINE:    'Real Reviews. Real Customers. Real Quality.',
 
-  WHATSAPP_NUMBER:  '919999999999',
+  WHATSAPP_NUMBER:  '8754745373',
   // Format: country code + number. Example India: '919876543210'
 
-  INSTAGRAM_HANDLE: 'omegaattire',
+  INSTAGRAM_HANDLE: 'omega_attire',
   // Without @ symbol
 
-  CONTACT_EMAIL:    'hello@omegaattire.in',
+  CONTACT_EMAIL:    'omegattire@gmail.com',
 
   ADMIN_EMAIL:      'admin@omegaattire.in',
   // Create this user in Supabase → Authentication → Users
