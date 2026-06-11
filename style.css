@@ -419,7 +419,7 @@ textarea { resize: vertical; min-height: 110px; }
   flex-wrap: wrap; gap: 36px; padding-bottom: 40px;
   border-bottom: 1px solid rgba(255,255,255,.09);
 }
-.footer .logo-omega { color: var(--red); }
+.footer .logo-omega { color: var(--white); }
 .footer .logo-text,
 .footer .logo { color: rgba(255,255,255,.92) !important; }
 .footer-tagline { font-size: .85rem; color: rgba(255,255,255,.38); margin-top: 10px; }
