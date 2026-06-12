@@ -96,7 +96,7 @@ body {
   height: 100%; max-width: 1180px; margin: 0 auto; padding: 0 20px;
 }
 .logo { display: flex; align-items: center; gap: 9px; font-family: var(--font-d); font-size: 1.35rem; letter-spacing: .06em; }
-.logo-omega { color: var(--black); font-size: 1.7rem; line-height: 1; }
+.logo-omega { color: var(--red); font-size: 1.7rem; line-height: 1; }
 .nav-links { display: flex; align-items: center; gap: 26px; }
 .nav-links a {
   font-size: .875rem; font-weight: 500; letter-spacing: .025em;
@@ -207,6 +207,7 @@ section { padding: 88px 20px; }
   border-radius: var(--radius); padding: 26px;
   box-shadow: var(--shadow); transition: transform var(--t), box-shadow var(--t);
   position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 12px;
+  color: var(--black); /* force text color to always follow theme */
 }
 .review-card::before {
   content: '"'; position: absolute; top: -8px; right: 16px;
@@ -215,6 +216,13 @@ section { padding: 88px 20px; }
 }
 .review-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
 
+/* Dark mode review card — light card on dark page */
+body.dark .review-card {
+  background: #1e1e1e;
+  border-color: #333;
+  color: #f0f0f0;
+}
+
 .rc-top { display: flex; justify-content: space-between; align-items: flex-start; }
 .rc-author { display: flex; align-items: center; gap: 11px; }
 .rc-avatar {
@@ -222,16 +230,21 @@ section { padding: 88px 20px; }
   display: flex; align-items: center; justify-content: center;
   font-weight: 800; font-size: 1rem; color: #fff; flex-shrink: 0;
 }
-.rc-name { font-weight: 700; font-size: .93rem; }
+.rc-name { font-weight: 700; font-size: .93rem; color: var(--black); }
 .rc-city { font-size: .78rem; color: var(--g3); margin-top: 1px; }
+body.dark .rc-name { color: #f0f0f0; }
+body.dark .rc-city { color: #aaa; }
 .rc-stars { font-size: .95rem; color: #f5a623; letter-spacing: 1px; }
 .verified-badge {
   display: inline-flex; align-items: center; gap: 3px;
   font-size: .7rem; font-weight: 700; color: #16a34a;
   background: #f0fdf4; padding: 2px 8px; border-radius: 100px;
 }
+body.dark .verified-badge { background: #052e16; color: #4ade80; }
 .rc-text { font-size: .9rem; color: var(--g2); line-height: 1.72; flex: 1; }
+body.dark .rc-text { color: #d4d4d4; }
 .rc-meta { font-size: .78rem; color: var(--g4); display: flex; flex-direction: column; gap: 3px; }
+body.dark .rc-meta { color: #888; }
 .rc-images { display: flex; gap: 8px; flex-wrap: wrap; }
 .rc-img {
   width: 68px; height: 68px; object-fit: cover; border-radius: 7px;
@@ -419,7 +432,7 @@ textarea { resize: vertical; min-height: 110px; }
   flex-wrap: wrap; gap: 36px; padding-bottom: 40px;
   border-bottom: 1px solid rgba(255,255,255,.09);
 }
-.footer .logo-omega { color: var(--white); }
+.footer .logo-omega { color: var(--red); }
 .footer .logo-text,
 .footer .logo { color: rgba(255,255,255,.92) !important; }
 .footer-tagline { font-size: .85rem; color: rgba(255,255,255,.38); margin-top: 10px; }
@@ -616,3 +629,96 @@ tbody tr:hover { background: var(--g6); }
   .hero-btns { flex-direction: column; }
   .hero-btns .btn { width: 100%; }
 }
+
+/* ── DARK MODE FIXES ─────────────────────────────────────────── */
+
+/* Form inputs */
+body.dark input,
+body.dark select,
+body.dark textarea {
+  background: #1e1e1e;
+  color: #f0f0f0;
+  border-color: #444;
+}
+body.dark input::placeholder,
+body.dark textarea::placeholder { color: #666; }
+body.dark input:focus,
+body.dark select:focus,
+body.dark textarea:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(230,25,25,.15);
+}
+body.dark label { color: #ccc; }
+
+/* Upload zone */
+body.dark .upload-zone {
+  border-color: #444;
+  background: #1a1a1a;
+}
+body.dark .upload-zone:hover { border-color: var(--red); background: #2a0000; }
+body.dark .upload-zone p { color: #aaa; }
+body.dark .upload-zone small { color: #666; }
+
+/* FAQ */
+body.dark .faq-item { background: #1e1e1e; border-color: #333; }
+body.dark .faq-q { color: #f0f0f0; }
+body.dark .faq-a { color: #aaa; }
+
+/* Admin table */
+body.dark table { color: #f0f0f0; }
+body.dark thead th { background: #1a1a1a; color: #aaa; }
+body.dark tbody tr { border-color: #2a2a2a; }
+body.dark tbody tr:hover { background: #1a1a1a; }
+body.dark .admin-card { background: #1e1e1e; }
+body.dark .admin-card-header { border-color: #333; }
+body.dark .admin-stat { background: #1e1e1e; }
+body.dark .admin-main { background: #111; }
+
+/* Star picker */
+body.dark .star-pick { color: #444; }
+body.dark .star-pick:hover,
+body.dark .star-pick.on { color: #f5a623; }
+body.dark .star-lbl { color: #888; }
+
+/* Rating summary */
+body.dark .rating-summary { background: #1a1a1a; }
+body.dark .rs-bar { background: #333; }
+body.dark .rs-bar-row { color: #aaa; }
+
+/* Gallery */
+body.dark .gallery-item { background: #222; }
+
+/* Contact links */
+body.dark .cl-em { background: #1e1e1e; color: #ccc; }
+
+/* Page hero */
+body.dark .page-hero { background: #111; }
+
+/* Hero bg shape */
+body.dark .hero-bg-shape { background: #1a1a1a; }
+
+/* Buttons in dark mode */
+body.dark .btn-outline { color: #f0f0f0; border-color: #f0f0f0; }
+body.dark .btn-outline:hover { background: #f0f0f0; color: #111; }
+body.dark .btn-ghost { background: #1e1e1e; color: #f0f0f0; }
+body.dark .btn-ghost:hover { background: #333; }
+
+/* Filter selects on reviews page */
+body.dark .filter-sel {
+  background: #1e1e1e;
+  color: #f0f0f0;
+  border-color: #444;
+}
+body.dark .search-wrap input {
+  background: #1e1e1e;
+  color: #f0f0f0;
+  border-color: #444;
+}
+
+/* Admin login card */
+body.dark .admin-login-card { background: #1e1e1e; }
+body.dark .admin-login-card h2 { color: #f0f0f0; }
+body.dark .admin-login-card p { color: #aaa; }
+
+/* Photo thumb */
+body.dark .photo-thumb { border-color: #444; }
