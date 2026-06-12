@@ -96,7 +96,7 @@ body {
   height: 100%; max-width: 1180px; margin: 0 auto; padding: 0 20px;
 }
 .logo { display: flex; align-items: center; gap: 9px; font-family: var(--font-d); font-size: 1.35rem; letter-spacing: .06em; }
-.logo-omega { color: var(--red); font-size: 1.7rem; line-height: 1; }
+.logo-omega { color: var(--black); font-size: 1.7rem; line-height: 1; }
 .nav-links { display: flex; align-items: center; gap: 26px; }
 .nav-links a {
   font-size: .875rem; font-weight: 500; letter-spacing: .025em;
